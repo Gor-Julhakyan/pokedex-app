@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './styles/AppToolbar.sass';
-import logo from '../logo.svg';
-import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import TextField from '@material-ui/core/TextField';
@@ -25,7 +24,7 @@ const props = {
 }
 
 
-const AppToolbar = ({}) => {
+const AppToolbar = ({ }) => {
   return (
     <div className="AppToolbar">
       <MuiThemeProvider theme={theme}>
@@ -55,10 +54,10 @@ const AppToolbar = ({}) => {
             ))}
             </TextField>
 
-            // <IconButton color="inherit" aria-label="Menu">
-            //   <MenuIcon />
-            // </IconButton>
-            // {props.pageItemCnt}
+            <IconButton color="inherit" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
+            {props.pageItemCnt}
           </Toolbar>
         </AppBar>
       </MuiThemeProvider>

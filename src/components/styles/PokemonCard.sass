@@ -1,0 +1,92 @@
+.PokemonCard
+  display: flex
+  flex-direction: column
+  width: 150px
+  border: 1px solid #607d8b30
+  background-color: #fff
+  margin: 15px
+  font-family: 'Roboto Condensed'
+  border-radius: 10px
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)
+  transition: all .3s ease
+  .avatar-section
+    background: rgba(96, 125, 139, 0.07)
+    .avatar
+      width: auto
+      height: auto
+      max-width: 100%
+  .title-line
+    position: relative
+    bottom: -24px
+    border-color: #9c681a
+    border-top: 0
+  .title
+    font-weight: 400
+    color: #9c681a
+    margin: 5px 35px
+    background-color: #fff
+    position: relative
+  .name
+    text-transform: uppercase
+    font-size: 22px
+    background-color: #b98c49
+    color: #fbfbfb
+    font-weight: normal
+    letter-spacing: 2px
+    margin: 0
+    padding: 5px    
+  .stat
+    display: flex
+    align-items: center
+    padding: 5px
+    margin: 5px 0
+    .icon
+      width: 24px
+      height: 24px
+      margin-right: 5px
+    .value
+      display: flex
+      justify-content: center
+      align-items: center
+      width: 110px
+      height: 25px
+      background-color: #eadfc5
+      border-radius: 5px
+      position: relative
+      // border: 1px solid #d6cbb1
+      .default-progress
+        background: #b1c518
+        height: 100%
+        position: absolute
+        left: 0
+        border-radius: 5px 0 0 5px
+      .special-progress
+        background: #06aeec
+        height: 100%
+        position: absolute
+        left: 0
+        border-radius: 5px 0 0 5px
+      .text
+        z-index: 2
+        color: #232701
+        font-size: 18px
+        .effort
+          color: #3F51B5
+          font-size: 18px
+          .plus
+            position: relative
+            text-align: center
+            animation: color-bounce 3s infinite
+            font-size: 20px 
+
+@keyframes color-bounce
+  0%
+    color: #009688
+  25%
+    color: #2b8296
+  50%
+    color: #3F51B5
+  75%
+    color: #2b8296
+  100%
+    color: #009688

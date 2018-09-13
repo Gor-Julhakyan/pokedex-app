@@ -6,10 +6,19 @@ import AppToolbar from './AppToolbar';
 import PokemonList from './PokemonList';
 
 function pokemon(data) {
+  let avatars = []
+
+  Object.entries(data.sprites).map(img => {
+    if (img[1] !== null) avatars.push(img[1])
+  })
+
+console.log(avatars)
+
+
   return {
     id: data.id,
     name: data.name,
-    avatar: data.sprites.front_default,
+    avatars: avatars,
     stats: data.stats,
     types: data.types,
   }
@@ -41,8 +50,8 @@ class App extends Component {
             .then(data => {
               this.state.pokemons[data.id - 1] = pokemon(data)
               this.onHandleChange(2)
-              console.log(`data is ${this.state.pokemons}`)
-              console.log(`Progress is ${this.state.loaderProgress}`)
+              // console.log(`data is ${this.state.pokemons}`)
+              // console.log(`Progress is ${this.state.loaderProgress}`)
             })
         })
       })

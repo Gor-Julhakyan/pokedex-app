@@ -35,8 +35,6 @@ const PokemonCard = ({ pokemon }) => {
           </div>
         ))}
         </div>
-        <hr className="title-line"/>
-        <h2 className="title">STATS</h2>
     </div>
   )
 }

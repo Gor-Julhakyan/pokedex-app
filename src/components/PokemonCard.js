@@ -14,9 +14,7 @@ const PokemonCard = ({ pokemon }) => {
   return (
     <div className="PokemonCard">
       <div className="avatar-section">
-        {pokemon.avatars.map((avatar, i) => (
-          <img src={avatar} className="avatar" alt={`${pokemon.name} avatar`} key={i} />
-        ))}
+        <img src={pokemon.avatars[0]} className="avatar" alt={`${pokemon.name} avatar`} />
       </div>
       <h1 className="name">{pokemon.name}</h1>
       <div>
@@ -26,8 +24,8 @@ const PokemonCard = ({ pokemon }) => {
           <div className="stat" key={item.stat.name}>
           <img src={icons[item.stat.name]} className="icon" alt={item.stat.name} />
           <div className="value">
-          <span className="special-progress" style={{width: `${item.base_stat + item.effort}%`}}></span>
-          <span className="default-progress" style={{width: `${item.base_stat}%`}}></span>
+          <span className="special-progress" style={{width: `${(item.base_stat + item.effort) / 2}%`}}></span>
+          <span className="default-progress" style={{width: `${item.base_stat / 2}%`}}></span>
           <div className="text">
           <span>{item.base_stat}</span>
           {item.effort > 0 &&

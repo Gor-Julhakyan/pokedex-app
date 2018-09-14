@@ -5,15 +5,13 @@ import './styles/App.sass';
 import AppToolbar from './AppToolbar';
 import PokemonList from './PokemonList';
 
+//Fn that generate each pokemon data for our project
 function pokemon(data) {
   let avatars = []
 
   Object.entries(data.sprites).map(img => {
     if (img[1] !== null) avatars.push(img[1])
   })
-
-console.log(avatars)
-
 
   return {
     id: data.id,
@@ -25,18 +23,22 @@ console.log(avatars)
 }
 
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       startupLoader: true,
       loaderProgress: '100',
       showLoader: false,
-      pokemons: []
+      pokemonPerPage: 2,
+      pokemons: [],
+      type: '',
     }
+    this.inputChanges = this.inputChanges.bind(this)
   }
 
+  //Get data from API
   getPokemons() {
-    fetch('https://pokeapi.co/api/v2/pokemon/?limit=2&offset=0')
+    fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${this.state.pokemonPerPage}&offset=0`)
       .then(results => {
         return results.json()
       })
@@ -49,9 +51,7 @@ class App extends Component {
             })
             .then(data => {
               this.state.pokemons[data.id - 1] = pokemon(data)
-              this.onHandleChange(2)
-              // console.log(`data is ${this.state.pokemons}`)
-              // console.log(`Progress is ${this.state.loaderProgress}`)
+              this.onHandleChange(this.state.pokemonPerPage)
             })
         })
       })
@@ -63,11 +63,20 @@ class App extends Component {
     this.getPokemons()
   }
 
-  onHandleChange(e, pockemonData) {
+
+  onHandleChange(e) {
     this.setState({
       loaderProgress: this.state.loaderProgress - 100/e,
       startupLoader: this.state.loaderProgress === 100/e ? false: true,
     })
+  }
+
+  inputChanges(e) {
+    console.log(e)
+    console.log('Id is ' +e.name)
+    console.log('Input changes')
+    this.state[e.name] = e.value
+    this.getPokemons()
   }
 
   render() {
@@ -85,12 +94,11 @@ class App extends Component {
           </div>
         }
 
-        <AppToolbar />
+        <AppToolbar inputChanges={this.inputChanges} states={this.state}/>
         
-        {!this.state.startupLoader && !this.state.showLoader &&
-          <PokemonList pokemons={this.state.pokemons} />
-        }
-      </div>
+
+        <PokemonList pokemons={this.state.pokemons} />
+        </div>
     );
   }
 }

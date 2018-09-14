@@ -1,6 +1,5 @@
 import React from 'react';
 import './styles/PokemonCard.sass';
-// import {attack} from '../assets/icons/*.svg'
 
 const PokemonCard = ({ pokemon }) => {
   const reqSvgs = require.context('../assets/icons/', true, /\.svg$/)

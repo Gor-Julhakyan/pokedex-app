@@ -29,12 +29,14 @@ class App extends Component {
       startupLoader: true,
       loaderProgress: '100',
       showLoader: false,
-      pokemonPerPage: 2,
+      pokemonPerPage: 20,
+      pokemonTypes: [],
       pokemons: [],
-      type: '',
+      category: ' ',
     }
     this.inputChanges = this.inputChanges.bind(this)
   }
+
 
   //Get data from API
   getPokemons() {
@@ -43,7 +45,6 @@ class App extends Component {
         return results.json()
       })
       .then(data => {
-        console.log(data)
         data.results.map(item => {
           fetch(item.url)
             .then(results => {
@@ -57,9 +58,37 @@ class App extends Component {
       })
   }
 
-
+  filterByCategory() {
+    this.state.pokemons = []
+    fetch(`https://pokeapi.co/api/v2/type/${this.state.category}/`)
+      .then(results => {
+        return results.json()
+      })
+      .then(data => {
+        data.pokemon.map((item, i) => {
+          fetch(item.pokemon.url)
+            .then(results => {
+              return results.json()
+            })
+            .then(data => {
+              this.state.pokemons[i] = pokemon(data)
+              this.onHandleChange(this.state.pokemonPerPage)
+            })
+        })
+      })
+  }
   
   componentDidMount() {
+    fetch('https://pokeapi.co/api/v2/type/')
+      .then(results => {
+        return results.json()
+      })
+      .then(data => {
+        this.setState({
+          pokemonTypes: data.results
+        })
+      })
+
     this.getPokemons()
   }
 
@@ -67,16 +96,13 @@ class App extends Component {
   onHandleChange(e) {
     this.setState({
       loaderProgress: this.state.loaderProgress - 100/e,
-      startupLoader: this.state.loaderProgress === 100/e ? false: true,
+      startupLoader: this.state.pokemons === 100/e ? false: null
     })
   }
 
   inputChanges(e) {
-    console.log(e)
-    console.log('Id is ' +e.name)
-    console.log('Input changes')
     this.state[e.name] = e.value
-    this.getPokemons()
+    e.name === 'category' ? this.filterByCategory() : this.getPokemons()
   }
 
   render() {
@@ -98,7 +124,7 @@ class App extends Component {
         
 
         <PokemonList pokemons={this.state.pokemons} />
-        </div>
+      </div>
     );
   }
 }

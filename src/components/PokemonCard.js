@@ -14,7 +14,7 @@ const PokemonCard = ({ pokemon }) => {
   return (
     <div className="PokemonCard">
       <div className="avatar-section">
-        <img src={pokemon.avatars[0]} className="avatar" alt={`${pokemon.name} avatar`} />
+        <img src={pokemon.avatars[2]} className="avatar" alt={`${pokemon.name} avatar`} />
       </div>
       <h1 className="name">{pokemon.name}</h1>
       <div>

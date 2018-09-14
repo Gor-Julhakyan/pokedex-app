@@ -8,6 +8,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import Input from '@material-ui/core/Input';
+import Chip from '@material-ui/core/Chip';
+
 
 const theme = createMuiTheme({
   palette: {
@@ -34,7 +40,7 @@ const AppToolbar = (props) => {
       <MuiThemeProvider theme={theme}>
         <AppBar position="static">
           <Toolbar className="toolbar">
-            <TextField
+            {/* <TextField
               name = "type"
               label="Type"
               type="search"
@@ -42,15 +48,34 @@ const AppToolbar = (props) => {
               margin = "normal"
               color = "inherit"
               onChange={inputChanges}
-            />
+            /> */}
+
+            <TextField
+              name="category"
+              select
+              label="Category"
+              value={props.states.category}
+              className='classes.textField'
+              onChange={inputChanges}
+              SelectProps={{
+                MenuProps: {
+                  className: 'classes.menu',
+                },
+              }}
+              helperText="Select type"
+            >
+              {props.states.pokemonTypes.map(option => (
+                <MenuItem key={option.name} value={option.name} >
+                  {option.name}
+                </MenuItem>
+              ))}
+            </TextField>
 
             <div>
-              <IconButton aria-label="Menu" className="items-count">20</IconButton>
-              <IconButton aria-label="Menu" className="items-count">100</IconButton>
-              <IconButton aria-label="Menu" className="items-count">50</IconButton>
+              <IconButton aria-label="pokemonPerPage" name="pokemonPerPage" value="20" className="items-count" onClick={inputChanges}>20</IconButton>
+              <IconButton aria-label="pokemonPerPage" name="pokemonPerPage" value="50" className="items-count" onClick={inputChanges}>50</IconButton>
+              <IconButton aria-label="pokemonPerPage" name="pokemonPerPage" value="100" className="items-count" onClick={inputChanges}>100</IconButton>
             </div>
-
-            
             
           </Toolbar>
         </AppBar>
